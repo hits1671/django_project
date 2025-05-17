@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
+
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
     def create_user(self, email, name, password=None):
@@ -15,6 +16,7 @@ class UserProfileManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
     def create_superuser(self, email, name, password=None):
         """Create and return a superuser with given details"""
         user = self.create_user(email, name, password)
@@ -22,6 +24,7 @@ class UserProfileManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for users in the system"""
@@ -31,11 +34,14 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
+    objects = UserProfileManager()
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
     def __str__(self):
         """Return string representation of our user"""
+        print("mail is", self.email)
         return self.email
     
     def get_full_name(self):

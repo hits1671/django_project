@@ -117,4 +117,6 @@ cd /directory_name
 Change to parent directory
 
 cd ..
+
+superuser pass email = hitesh@dev.com pass = 1234 name = hitesh
 # django_project
